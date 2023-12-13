@@ -1,0 +1,41 @@
+package com.kaspersky.tutorial.tests
+
+import androidx.test.ext.junit.rules.activityScenarioRule
+import com.kaspersky.kaspresso.device.exploit.Exploit
+import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
+import com.kaspersky.kaspresso.tutorial.MainActivity
+import com.kaspersky.kaspresso.tutorial.R
+import com.kaspersky.tutorial.screen.MainScreen
+import com.kaspersky.tutorial.screen.WifiScreen
+import org.junit.Rule
+import org.junit.Test
+
+class WifiSampleTest : TestCase() {
+
+    @get:Rule
+    val activityRule = activityScenarioRule<MainActivity>()
+
+    @Test
+    fun wifiTest() {
+        MainScreen {
+            wifiActivityButton {
+                isVisible()
+                isClickable()
+                click()
+            }
+        }
+        WifiScreen {
+            device.exploit.setOrientation(Exploit.DeviceOrientation.Portrait)
+            checkWifiButton.isVisible()
+            checkWifiButton.isClickable()
+            wifiStatus.hasEmptyText()
+            checkWifiButton.click()
+            wifiStatus.hasText(R.string.enabled_status)
+            device.network.toggleWiFi(false)
+            checkWifiButton.click()
+            wifiStatus.hasText(R.string.disabled_status)
+            device.exploit.rotate()
+            wifiStatus.hasText(R.string.disabled_status)
+        }
+    }
+}

@@ -3,6 +3,7 @@ plugins {
     id("convention.publication-android-lib")
     id("convention.third-party-report")
     id("convention.legal-documents")
+    id("org.jetbrains.kotlin.android")
 }
 
 publish {
@@ -14,4 +15,8 @@ dependencies {
     implementation(libs.truth)
     implementation(libs.androidXTestCore)
     implementation(libs.uiAutomator)
+    implementation("androidx.core:core-ktx:+")
+}
+android {
+    namespace = "com.kaspersky.components.kautomator"
 }

@@ -3,6 +3,7 @@ plugins {
     id("convention.publication-android-lib")
     id("convention.third-party-report")
     id("convention.legal-documents")
+    id("org.jetbrains.kotlin.android")
 }
 
 publish {
@@ -23,7 +24,11 @@ dependencies {
     implementation(projects.adbServer.adbServerDevice)
     implementation(libs.appcompat)
     implementation(libs.material)
+    implementation("androidx.core:core-ktx:+")
 
     testImplementation(libs.junit)
     testImplementation(libs.truth)
+}
+android {
+    namespace = "com.kaspersky.kaspresso"
 }

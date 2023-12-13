@@ -1,5 +1,6 @@
 plugins {
     id("convention.android-app")
+    id("org.jetbrains.kotlin.android")
 }
 
 android {
@@ -40,6 +41,7 @@ android {
         unitTests.isReturnDefaultValues = true
         unitTests.isIncludeAndroidResources = true
     }
+    namespace = "com.kaspersky.kaspresso.composesupport.sample"
 }
 
 dependencies {
@@ -51,6 +53,7 @@ dependencies {
     implementation(libs.composeNavigation)
     implementation(libs.lifecycleViewModelComposeKtx)
     implementation(libs.composeRuntimeLiveData)
+    implementation("androidx.core:core-ktx:+")
 
     // kaspresso
     if (hasProperty("kaspresso.snapshotVersion")) {

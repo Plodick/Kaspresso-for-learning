@@ -1,5 +1,6 @@
 plugins {
     id("convention.android-app")
+    id("org.jetbrains.kotlin.android")
 }
 
 android {
@@ -12,6 +13,7 @@ android {
     testOptions {
         execution = "ANDROIDX_TEST_ORCHESTRATOR"
     }
+    namespace = "com.kaspersky.kaspresso.alluresupport.sample"
 }
 
 dependencies {
@@ -19,6 +21,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.constraint)
     implementation(libs.multidex)
+    implementation("androidx.core:core-ktx:+")
 
     // kaspresso
     if (hasProperty("kaspresso.snapshotVersion")) {

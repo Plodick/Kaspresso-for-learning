@@ -1,5 +1,6 @@
 plugins {
     id("convention.android-app")
+    id("org.jetbrains.kotlin.android")
 }
 
 android {
@@ -30,6 +31,7 @@ android {
         unitTests.isReturnDefaultValues = true
         unitTests.isIncludeAndroidResources = true
     }
+    namespace = "com.kaspersky.kaspressample"
 }
 
 dependencies {
@@ -38,6 +40,7 @@ dependencies {
     implementation(libs.constraint)
     implementation(libs.multidex)
     implementation(libs.androidXLifecycleRuntimeKtx)
+    implementation("androidx.core:core-ktx:+")
 
     androidTestImplementation(libs.junit)
 

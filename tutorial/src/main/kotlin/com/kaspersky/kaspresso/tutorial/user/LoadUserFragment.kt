@@ -21,6 +21,8 @@ class LoadUserFragment : Fragment() {
 
     private lateinit var viewModel: LoadUserViewModel
 
+    private var isForScreenshots = false
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentLoadUserBinding.inflate(inflater, container, false)
         return binding.root
@@ -28,9 +30,11 @@ class LoadUserFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this)[LoadUserViewModel::class.java]
-        binding.loadingButton.setOnClickListener {
-            viewModel.loadUser()
+        if (!isForScreenshots) {
+            viewModel = ViewModelProvider(this)[LoadUserViewModel::class.java]
+            binding.loadingButton.setOnClickListener {
+                viewModel.loadUser()
+            }
         }
         observeViewModel()
     }
@@ -81,5 +85,12 @@ class LoadUserFragment : Fragment() {
     companion object {
 
         fun newInstance(): LoadUserFragment = LoadUserFragment()
+
+        fun newTestInstance(
+            mockedViewModel: LoadUserViewModel
+        ): LoadUserFragment = LoadUserFragment().apply {
+            viewModel = mockedViewModel
+            isForScreenshots = true
+        }
     }
 }
